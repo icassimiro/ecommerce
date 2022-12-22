@@ -9,7 +9,7 @@
   height: 15vh;
   background-color: rgb(83, 83, 83);
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 .logo {
@@ -20,24 +20,25 @@
 .divheader {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 80%;
+  width: 40%;
   height: 30vh;
+  position: absolute;
   gap: 2rem;
-  padding-left: 5rem;
 }
 
 .headerinput {
-  width: 70%;
+  width: 100%;
   height: 3vh;
   text-align: center;
-  margin-left: 10rem;
+
+  font-size: 22px;
+  display: flex;
 }
 .headerbtn {
-  width: 10%;
-  height: 4vh;
+  width: 15%;
+  height: 5vh;
   border-radius: 5px;
-  background-color: rgb(128, 128, 128);
+
   color: rgb(14, 14, 14);
   font-weight: bold;
   border: none;
@@ -57,8 +58,8 @@
   padding-left: 4rem;
 }
 .allcategories {
-  width: 100%;
-  height: 350vh;
+  width: 20%;
+  height: 340vh;
 
   background-color: rgb(194, 184, 184);
   padding: 1rem;
@@ -67,7 +68,7 @@
   display: flex;
   align-items: center;
 
-  width: 15%;
+  width: 80%;
   height: 5vh;
   border: 1px solid rgb(245, 245, 245);
 
@@ -76,4 +77,57 @@
   text-align: justify;
   padding: 1rem;
   margin: 1rem;
+}
+
+.allresults {
+  width: 100%;
+  height: 10vh;
+  padding-left: 20rem;
+  margin-top: 18rem;
+}
+
+.searchresults {
+  width: 100%;
+  height: 10vh;
+  border: 1px solid rgb(201, 201, 201);
+  padding: 5rem;
+  margin: 2rem;
+}
+
+.results {
+  padding: 10px;
+  font-size: 13px;
+  font-weight: bold;
+}
+.btn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.buybtn {
+  width: 15%;
+  height: 5vh;
+  border-radius: 5px;
+
+  color: rgb(14, 14, 14);
+  font-weight: bold;
+  border: none;
+}
+
+.clicks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  gap: 2rem;
+}
+.changepage {
+  width: 15%;
+  height: 5vh;
+  border-radius: 5px;
+
+  color: rgb(14, 14, 14);
+  font-weight: bold;
+  border: none;
 }

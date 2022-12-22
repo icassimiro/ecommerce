@@ -4,20 +4,27 @@ import React, { useState } from "react";
 import { searchTitle } from "./api";
 
 const Header = () => {
-  const [title, setTitle] = useState("dito");
+  const [results, setResults] = useState();
 
   const [search, setSearch] = useState();
 
-  const onChangeText = (e) => {
+  const onChangeHandler = (e) => {
     setSearch(e.target.value);
   };
-  const onClickButton = () => {
-    onSearchTiTle(search);
+
+  const onButtonClickHandler = () => {
+    onSearchHandler(search);
+  };
+  const cart = "🛒";
+
+  const buyButtonClick = () => {
+    console.log("COMPRADO");
   };
 
-  const onSearchTiTle = async (title) => {
-    const result = await searchTitle(title);
-    setTitle(result);
+  const onSearchHandler = async (results) => {
+    const result = await searchTitle(results);
+    setResults(result.results);
+    console.log("titulo", result);
   };
 
   return (
@@ -28,21 +35,31 @@ const Header = () => {
           className="headerinput"
           type="text"
           placeholder="PESQUISAR AQUI"
-          onChange={onChangeText}
+          onChange={onChangeHandler}
         />{" "}
         {search}
-        <button className="headerbtn" onClick={onClickButton}>
+        <button className="headerbtn" onClick={onButtonClickHandler}>
           BUSCAR
         </button>
-        <div>
-          {title ? (
-            <div>
-              <div>titulo:{title.title}</div>
-              <div>preco:{title.amount}</div>
-            </div>
-          ) : null}
-        </div>
       </div>
+      <div className="allresults">
+        {results &&
+          results.map((res) => (
+            <div className="searchresults" key={res.id}>
+              <p className="results">{res.title}</p>
+              <img src={res.thumbnail} />
+              <div className="btn">
+                <button className="buybtn" onClick={buyButtonClick}>
+                  COMPRAR{cart}
+                </button>
+              </div>
+              <p className="results">
+                {res.price}-{res.currency_id}
+              </p>
+            </div>
+          ))}
+      </div>
+
       <div className="buy">
         <h4>COMPRAS</h4>
         <BsCart className="bs" />
