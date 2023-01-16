@@ -1,11 +1,50 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CartContext } from "../ShoppingCartContext";
 
-import { searchTitle } from "./api";
+import { searchTitle } from "./API";
 
-const Section = () => {
+export const Section = () => {
   const [itensPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(0);
   const [results, setResults] = useState([]);
+  const [cart, setCart] = useContext(CartContext);
+
+  const addToCart = () => {
+    setCart((currItems) => {
+      const FoundItems = currItems.find((item) => item.results === results);
+      if (FoundItems) {
+        return currItems.map((item) => {
+          if (item.results === results) {
+            return { ...item, quantity: item.quantity + 1 };
+          } else {
+            return item;
+          }
+        });
+      } else {
+        return [...currItems, { results, quantity: 1 }];
+      }
+    });
+  };
+  const removeItem = (results) => {
+    setCart((currItems) => {
+      if ((currItems.find((item) => results.id) === results?.quantity) === 1) {
+        return currItems.filter((item) => item.results !== results);
+      } else {
+        return currItems.map((item) => {
+          if (item.results === results) {
+            return { ...item, quantity: (item.quantity = 1) };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
+  };
+
+  const getQuantity = (id) => {
+    return cart.find((item) => item.results === results)?.quantity || 0;
+  };
+  const quantityItem = getQuantity(results);
 
   const [search, setSearch] = useState();
   const pages = Math.ceil(results.length / itensPerPage);
@@ -58,7 +97,12 @@ const Section = () => {
                 </div>
               </div>
               <div className="buybtn">
-                <button className="btn">COMPRAR</button>
+                <button onClick={() => addToCart()} className="btn">
+                  {quantityItem > 0 && (
+                    <div className="quantity">{quantityItem}</div>
+                  )}
+                  COMPRAR
+                </button>
               </div>
             </div>
           </div>
@@ -80,5 +124,3 @@ const Section = () => {
     </section>
   );
 };
-
-export default Section;

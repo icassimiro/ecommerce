@@ -9,10 +9,29 @@
   display: flex;
   background-color: black;
 }
+.store {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4rem;
+  font-size: 25px;
+}
+.number {
+  color: white;
+
+  font-size: 25px;
+  margin-left: 1rem;
+  text-decoration: none;
+}
 .link {
   font-size: 25px;
   text-decoration: none;
   color: whitesmoke;
+}
+.quantity {
+  font-size: 20px;
+  color: rgb(255, 255, 255);
 }
 .shopcart {
   font-size: 25px;
@@ -105,8 +124,8 @@
   width: 100%;
 }
 .btn {
-  width: 45%;
-  height: 5vh;
+  width: 46%;
+  height: 6vh;
   border-radius: 5px;
   margin-top: 2.5rem;
 
