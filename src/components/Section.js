@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { CartContext } from "../ShoppingCartContext";
+import { CartContext } from "./ShoppingCartContext";
 
 import { searchTitle } from "./API";
 
@@ -25,14 +25,17 @@ export const Section = () => {
       }
     });
   };
-  const removeItem = (results) => {
+  const removeItem = () => {
     setCart((currItems) => {
-      if ((currItems.find((item) => results.id) === results?.quantity) === 1) {
+      if (
+        (currItems.find((item) => item.results) === results?.quantity) ===
+        -1
+      ) {
         return currItems.filter((item) => item.results !== results);
       } else {
         return currItems.map((item) => {
           if (item.results === results) {
-            return { ...item, quantity: (item.quantity = 1) };
+            return { ...item, quantity: item.quantity - 1 };
           } else {
             return item;
           }
@@ -41,7 +44,7 @@ export const Section = () => {
     });
   };
 
-  const getQuantity = (id) => {
+  const getQuantity = () => {
     return cart.find((item) => item.results === results)?.quantity || 0;
   };
   const quantityItem = getQuantity(results);
@@ -85,8 +88,8 @@ export const Section = () => {
 
       {currentResults &&
         currentResults.map((res) => (
-          <div className="allresults">
-            <div className="searchresults" key={res.id}>
+          <div key={res.id} className="allresults">
+            <div className="searchresults">
               <div className="results">{res.title}</div>
               <div className="images">
                 <img className="img" src={res.thumbnail} alt="images" />
@@ -96,13 +99,27 @@ export const Section = () => {
                   {res.price} - {res.currency_id}
                 </div>
               </div>
-              <div className="buybtn">
-                <button onClick={() => addToCart()} className="btn">
-                  {quantityItem > 0 && (
-                    <div className="quantity">{quantityItem}</div>
-                  )}
-                  COMPRAR
-                </button>
+              <div className="buydiv">
+                {quantityItem === 0 ? (
+                  <button className="buybtn" onClick={() => addToCart()}>
+                    {" "}
+                    COMPRAR
+                  </button>
+                ) : (
+                  <div className="adddiv">
+                    <button className="add" onClick={() => addToCart()}>
+                      {" "}
+                      ADICIONAR
+                    </button>
+                  </div>
+                )}
+                {quantityItem > 0 && (
+                  <div className="removediv">
+                    <button className="remove" onClick={() => removeItem()}>
+                      REMOVER
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>

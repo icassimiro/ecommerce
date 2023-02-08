@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "phosphor-react";
 import { useContext } from "react";
-import { CartContext } from "../ShoppingCartContext";
+import { CartContext } from "./ShoppingCartContext";
+import logo from "../images/logo.png";
 
 export const Navbar = () => {
   const [cart, setCart] = useContext(CartContext);
@@ -13,11 +14,17 @@ export const Navbar = () => {
       <Link to={"/"} className="store">
         STORE
       </Link>
+      <div className="divimg">
+        {" "}
+        <img className="img" src={logo} alt="logoimg" />
+      </div>
+
       <div className="links">
-        <Link className="link" to="/">
+        <Link className="link" to="/cart">
           {" "}
           Shop{" "}
         </Link>
+
         <Link to="/cart">
           <ShoppingCart className="shopcart" />
           <span className="number">{quantity}</span>
