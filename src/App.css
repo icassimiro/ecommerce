@@ -41,7 +41,8 @@
 }
 
 .shopcart {
-  font-size: 25px;
+  margin-top: 0.5rem;
+  font-size: 30px;
   color: whitesmoke;
 }
 
@@ -101,13 +102,14 @@
 }
 
 .results {
-  width: 85%;
+  width: 82%;
   display: flex;
   height: 3vh;
-  padding: 2rem;
+  padding: 3rem;
   font-size: 16px;
   font-weight: bold;
   align-items: center;
+  justify-content: center;
 }
 
 .prices {
@@ -134,7 +136,7 @@
 }
 
 .buybtn {
-  width: 45%;
+  width: 20%;
   height: 5vh;
   margin-top: 5rem;
   background-color: black;
@@ -196,8 +198,8 @@
 
 .searchresults {
   border: 2px solid black;
-  width: 16%;
-  height: 43vh;
+  width: 23%;
+  height: 50vh;
 }
 
 .pagebtn {
@@ -263,4 +265,30 @@
   width: 125%;
   display: flex;
   justify-content: flex-end;
+}
+
+.remove {
+  margin-top: 4rem;
+  width: 60%;
+  margin-left: 1rem;
+  background-color: red;
+  border: none;
+}
+.carticon {
+  font-size: 50px;
+}
+
+.pages {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.pagebtn {
+  background-color: black;
+  color: white;
+  font-size: 15px;
 }

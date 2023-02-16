@@ -1,71 +1,50 @@
-import { useContext, useState } from "react";
-import { CartContext } from "./ShoppingCartContext";
+import { useEffect, useState } from "react";
+import { getItem, setItem } from "./LocalStorage";
+import { BsFillCartCheckFill, BsFillCartPlusFill } from "react-icons/bs";
+import { searchBar } from "./API";
 
-import { searchTitle } from "./API";
-
-export const Section = () => {
-  const [itensPerPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [results, setResults] = useState([]);
-  const [cart, setCart] = useContext(CartContext);
-
-  const addToCart = () => {
-    setCart((currItems) => {
-      const FoundItems = currItems.find((item) => item.results === results);
-      if (FoundItems) {
-        return currItems.map((item) => {
-          if (item.results === results) {
-            return { ...item, quantity: item.quantity + 1 };
-          } else {
-            return item;
-          }
-        });
-      } else {
-        return [...currItems, { results, quantity: 1 }];
-      }
-    });
-  };
-  const removeItem = () => {
-    setCart((currItems) => {
-      if (
-        (currItems.find((item) => item.results) === results?.quantity) ===
-        -1
-      ) {
-        return currItems.filter((item) => item.results !== results);
-      } else {
-        return currItems.map((item) => {
-          if (item.results === results) {
-            return { ...item, quantity: item.quantity - 1 };
-          } else {
-            return item;
-          }
-        });
-      }
-    });
-  };
-
-  const getQuantity = () => {
-    return cart.find((item) => item.results === results)?.quantity || 0;
-  };
-  const quantityItem = getQuantity(results);
-
+export const Section = (props) => {
+  const [cart, setCart] = useState(getItem("carrinho") || []);
   const [search, setSearch] = useState();
-  const pages = Math.ceil(results.length / itensPerPage);
+  const [data, setData] = useState([]);
+  const [itensPerPage, setItensPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(0);
+  const pages = Math.ceil(data.length / itensPerPage);
   const startIndex = currentPage * itensPerPage;
   const endIndex = startIndex + itensPerPage;
-  const currentResults = results.slice(startIndex, endIndex);
+  const currentItems = data.slice(startIndex, endIndex);
+
+  useEffect(() => {
+    const fetchApi = async (results, limit = 50, offset = 0) => {
+      const url = `https://api.mercadolibre.com/sites/MLB/search?q=${results}&limit=${limit}&offset=${offset}`;
+      const response = await fetch(url);
+      const objJson = await response.json();
+      setData(objJson.results);
+    };
+    fetchApi();
+  }, []);
+
+  const handleClick = (obj) => {
+    const element = cart.find((e) => e.id === obj.id);
+    if (element) {
+      const arrFilter = cart.filter((e) => e.id !== obj.id);
+      setCart(arrFilter);
+      setItem("carrinho", arrFilter);
+    } else {
+      setCart([...cart, obj]);
+      setItem("carrinho", [...cart, obj]);
+    }
+  };
 
   const onChangeHandler = (e) => {
     setSearch(e.target.value);
   };
-
-  const onButtonClickHandler = () => {
+  const onButtonClick = () => {
     onSearchHandler(search);
   };
-
-  const onSearchHandler = async (results) => {
-    const result = await searchTitle(results);
-    setResults(result.results);
+  const onSearchHandler = async (data) => {
+    const result = await searchBar(data);
+    setData(result.results);
     console.log("titulo", result);
   };
 
@@ -80,60 +59,44 @@ export const Section = () => {
             onChange={onChangeHandler}
           />{" "}
           {search}
-          <button className="headerbtn" onClick={onButtonClickHandler}>
+          <button onClick={onButtonClick} className="headerbtn">
             BUSCAR
           </button>
         </div>
       </div>
-
-      {currentResults &&
-        currentResults.map((res) => (
-          <div key={res.id} className="allresults">
-            <div className="searchresults">
-              <div className="results">{res.title}</div>
-              <div className="images">
-                <img className="img" src={res.thumbnail} alt="images" />
-              </div>
-              <div className="prices">
-                <div className="price">
-                  {res.price} - {res.currency_id}
-                </div>
-              </div>
-              <div className="buydiv">
-                {quantityItem === 0 ? (
-                  <button className="buybtn" onClick={() => addToCart()}>
-                    {" "}
-                    COMPRAR
-                  </button>
-                ) : (
-                  <div className="adddiv">
-                    <button className="add" onClick={() => addToCart()}>
-                      {" "}
-                      ADICIONAR
-                    </button>
-                  </div>
-                )}
-                {quantityItem > 0 && (
-                  <div className="removediv">
-                    <button className="remove" onClick={() => removeItem()}>
-                      REMOVER
-                    </button>
-                  </div>
-                )}
+      {currentItems.map((item) => (
+        <div key={item.id} className="allresults">
+          <div className="searchresults">
+            <div className="results">{item.title}</div>
+            <div className="images">
+              <img className="img" src={item.thumbnail} alt="images" />
+            </div>
+            <div className="prices">
+              <div className="price">
+                {item.price} - {item.currency_id}
               </div>
             </div>
+            <div className="buydiv">
+              <button onClick={() => handleClick(item)} className="buybtn">
+                {cart.some((itemCart) => itemCart.id === item.id) ? (
+                  <BsFillCartCheckFill />
+                ) : (
+                  <BsFillCartPlusFill />
+                )}
+              </button>
+            </div>
           </div>
-        ))}
-      <div className="changepage">
-        {Array.from(Array(pages), (results, index) => {
+        </div>
+      ))}
+      <div className="pages">
+        {Array.from(Array(pages), (item, index) => {
           return (
             <button
-              style={index === currentPage ? { backgroundColor: "gray" } : null}
               className="pagebtn"
               value={index}
               onClick={(e) => setCurrentPage(Number(e.target.value))}
             >
-              {index + 1}
+              {index}
             </button>
           );
         })}

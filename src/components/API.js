@@ -1,4 +1,4 @@
-export const searchTitle = async (results, limit = 50, offset = 0) => {
+export const searchBar = async (results, limit = 50, offset = 0) => {
   try {
     let url = `https://api.mercadolibre.com/sites/MLB/search?q=${results}&limit=${limit}&offset=${offset}`;
     const response = await fetch(url);
