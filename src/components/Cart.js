@@ -12,10 +12,18 @@ export const Cart = () => {
     setItem("carrinho", arrFilter);
   };
 
+  const subTotal = data.reduce((acc, cur) => acc + cur.price, 0);
+
   return (
     <div className="divcart">
       <div className="buycart">
         <ShoppingCart className="carticon" />{" "}
+      </div>
+      <div className="subtotal">
+        <h1> {`PREÇO TOTAL: ${subTotal} BRL`}</h1>
+      </div>
+      <div className="divbtncart">
+        <button className="btncart">FINALIZAR COMPRA</button>
       </div>
 
       {data.map((e) => (

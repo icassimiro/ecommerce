@@ -3,7 +3,7 @@ import { getItem, setItem } from "./LocalStorage";
 import { BsFillCartCheckFill, BsFillCartPlusFill } from "react-icons/bs";
 import { searchBar } from "./API";
 
-export const Section = (props) => {
+export const Section = () => {
   const [cart, setCart] = useState(getItem("carrinho") || []);
   const [search, setSearch] = useState();
   const [data, setData] = useState([]);
