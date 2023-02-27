@@ -38,9 +38,11 @@ export const Cart = () => {
                 {e.price} - {e.currency_id}
                 <div>
                   {" "}
-                  <button className="remove" onClick={() => removeItem(e)}>
-                    <BsFillCartDashFill />
-                  </button>
+                  <div className="removediv">
+                    <button className="remove" onClick={() => removeItem(e)}>
+                      <BsFillCartDashFill />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
