@@ -25,7 +25,6 @@ export const Cart = () => {
       <div className="divbtncart">
         <button className="btncart">FINALIZAR COMPRA</button>
       </div>
-
       {data.map((e) => (
         <div key={e.id} className="allresults">
           <div className="searchresults">
