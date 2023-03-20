@@ -334,17 +334,20 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1250px) {
   .navbar {
     width: 100%;
   }
+
   .store {
     font-size: 15px;
     margin-left: 1rem;
   }
+
   .links {
     background-color: black;
   }
+
   .link {
     display: flex;
     align-items: center;
@@ -352,40 +355,50 @@
     font-weight: bold;
     margin: 10px;
   }
+
   .cart {
     display: flex;
     align-items: center;
     margin: 0;
   }
+
   .shopcart {
     font-size: 20px;
   }
+
   .divimg {
     width: 100%;
   }
+
   .imglogo {
     width: 150px;
     height: 5vh;
     margin-top: 1.2rem;
     padding-left: 2rem;
   }
+
   .searchresults {
     width: 100%;
   }
+
   .headerbtn {
     width: 51%;
     font-size: 11px;
   }
+
   .headerinput {
     font-size: 10px;
   }
+
   .pages {
     width: 100%;
   }
+
   .pagebtn {
     width: 5%;
     height: 3vh;
   }
+
   .btncart {
     width: 50%;
     font-weight: bold;
