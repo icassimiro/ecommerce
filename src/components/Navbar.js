@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "phosphor-react";
-
 import logo from "../images/logo.png";
 
 export const Navbar = () => {
@@ -14,17 +13,15 @@ export const Navbar = () => {
         <img className="imglogo" src={logo} alt="logoimg" />
       </div>
 
-      <div className="links">
-        <Link className="link" to="/cart">
-          {" "}
-          Shop{" "}
-        </Link>
+      <Link className="link" to="/cart">
+        {" "}
+        Shop{" "}
+      </Link>
 
-        <Link to="/cart">
-          <ShoppingCart className="shopcart" />
-          <span className="number"></span>
-        </Link>
-      </div>
+      <Link className="cart" to="/cart">
+        <ShoppingCart className="shopcart" />
+        <span className="number"></span>
+      </Link>
     </div>
   );
 };
