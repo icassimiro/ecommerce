@@ -339,7 +339,7 @@
 }
 
 @media screen and (max-width: 1250px) {
-  . .navbar {
+  .navbar {
     width: 100%;
   }
 
@@ -385,6 +385,7 @@
     width: 60%;
     padding-top: 2rem;
   }
+
   .results {
     font-size: 18px;
   }
@@ -412,22 +413,27 @@
     font-weight: bold;
   }
 }
+
 @media screen and (max-width: 800px) {
   .btncart {
     width: 44%;
     height: 6vh;
   }
+
   .searchresults {
     width: 90%;
     height: 52vh;
   }
+
   .results {
     font-size: 17px;
     padding-top: 1rem;
   }
+
   .subtotal {
     font-size: 9.2px;
   }
+
   .btncart {
     font-size: 16px;
   }
