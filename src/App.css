@@ -37,6 +37,7 @@
   align-items: center;
   margin-right: 3rem;
 }
+
 .cart {
   display: flex;
   align-items: center;
@@ -83,7 +84,7 @@
 }
 
 .headerbtn {
-  width: 15%;
+  width: 20%;
   height: 4vh;
   border-radius: 5px;
   color: whitesmoke;
@@ -232,7 +233,7 @@
 }
 
 .divcart {
-  width: 100%;
+  width: 98%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -252,19 +253,15 @@
   font-size: 18px;
 }
 
-.divbtncart {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 .btncart {
+  width: 11%;
+  margin-top: 2rem;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
   height: 5vh;
   background-color: black;
   color: white;
-
-  border-radius: 5px;
-  font-weight: bold;
 }
 
 .img {
@@ -272,12 +269,12 @@
 }
 
 .imglogo {
-  width: 28%;
+  width: 15%;
   margin-right: 2rem;
 }
 
 .divimg {
-  width: 125%;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -328,14 +325,6 @@
   color: whitesmoke;
   font-weight: bold;
   margin-bottom: 5rem;
-}
-
-.btncart {
-  width: 12%;
-  margin-top: 2rem;
-  font-size: 18px;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 @media screen and (max-width: 1250px) {
@@ -391,8 +380,8 @@
   }
 
   .headerbtn {
-    width: 51%;
-    font-size: 11px;
+    width: 30%;
+    font-size: 10.5px;
   }
 
   .headerinput {
@@ -409,14 +398,14 @@
   }
 
   .btncart {
-    width: 25%;
+    width: 18%;
     font-weight: bold;
   }
 }
 
 @media screen and (max-width: 800px) {
   .btncart {
-    width: 44%;
+    width: 28%;
     height: 6vh;
   }
 
@@ -435,6 +424,18 @@
   }
 
   .btncart {
-    font-size: 16px;
+    font-size: 15px;
+  }
+
+  .headerbtn {
+    width: 55%;
+  }
+
+  .a {
+    overflow: hidden;
+  }
+
+  .divcart {
+    overflow: hidden;
   }
 }

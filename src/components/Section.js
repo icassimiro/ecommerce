@@ -57,6 +57,7 @@ export const Section = () => {
             type="text"
             placeholder="PESQUISAR AQUI"
             onChange={onChangeHandler}
+            spellCheck="false"
           />{" "}
           {search}
           <button onClick={onButtonClick} className="headerbtn">
