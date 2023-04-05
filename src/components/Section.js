@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { getItem, setItem } from "./LocalStorage";
 import { BsFillCartCheckFill, BsFillCartPlusFill } from "react-icons/bs";
 import { searchBar } from "./API";
@@ -13,6 +13,10 @@ export const Section = () => {
   const startIndex = currentPage * itensPerPage;
   const endIndex = startIndex + itensPerPage;
   const currentItems = data.slice(startIndex, endIndex);
+
+  useMemo(() => {
+    window.scrollTo({ top: 0 });
+  }, [currentPage]);
 
   useEffect(() => {
     const fetchApi = async (results, limit = 50, offset = 0) => {
